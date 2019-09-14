@@ -15,7 +15,7 @@ jobs:
     
     - name: Add current user to LXD group
       run: |
-        sudo usermod --append --groups lxd
+        sudo usermod --append --groups lxd $(whoami)
             
     - name: Initialize LXD
       run: |
