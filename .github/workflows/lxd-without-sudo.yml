@@ -1,1 +1,27 @@
 
+name: LXD without sudo
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - name: Install LXD
+      run: |
+        sudo snap install lxd --channel=3.0/stable
+    
+    - name: Add current user to LXD group
+      run: |
+        sudo usermod --append --groups lxd $(whoami)
+            
+    - name: Initialize LXD
+      run: |
+        sudo lxd init --auto
+      
+    - name: Check LXD Configuration
+      run: |
+        newgrp lxd && lxc info
