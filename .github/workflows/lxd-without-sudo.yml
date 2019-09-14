@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-
-    - name: Install LXD
-      run: |
-        sudo snap install lxd --channel=3.0/stable
     
     - name: Add current user to LXD group
       run: |
@@ -25,3 +21,15 @@ jobs:
     - name: Check LXD Configuration
       run: |
         sg lxd -c "lxc info"
+        
+    - name: Launche Ubuntu 18.04 LXC Container
+      run: |
+        sg lxd -c "lxc launch ubuntu:18.04 ubuntu"
+        
+    - name: List all available LXC container
+      run: |
+        sg lxd -c "lxc list"
+      
+    - name: Delete previously created container
+      run: |
+        sg lxd -c "lxc delete ubuntu"
