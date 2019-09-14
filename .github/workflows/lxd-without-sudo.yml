@@ -22,9 +22,13 @@ jobs:
       run: |
         sg lxd -c "lxc info"
         
-    - name: Launche Ubuntu 18.04 LXC Container
+    - name: Launch Ubuntu 18.04 LXC Container
       run: |
         sg lxd -c "lxc launch ubuntu:18.04 ubuntu"
+    
+    - name: Wait for container to come online
+      run: |
+        sleep 5
         
     - name: List all available LXC container
       run: |
@@ -32,4 +36,4 @@ jobs:
       
     - name: Delete previously created container
       run: |
-        sg lxd -c "lxc delete ubuntu"
+        sg lxd -c "lxc delete --force ubuntu"
