@@ -24,4 +24,4 @@ jobs:
       
     - name: Check LXD Configuration
       run: |
-        newgrp lxd && lxc info
+        sg lxd -c "lxc info"
